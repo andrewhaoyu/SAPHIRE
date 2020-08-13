@@ -181,7 +181,7 @@ SEIRfitting=function(init_sets_list,
   correlationPlot_modified(mcmc_pars_estimate, scaleCorText = F)
   dev.off()
   
-  png(paste0("../output/par_hist_run_",run_id,".png"))
+  pdf(paste0("../output/par_hist_run_",run_id,".pdf"))
   par(mfrow = c(2, 4))
   for(i in 1:n_pars) {
     hist(mcmc_pars_estimate[, i], xlab = pars_name[i], main = "", col = "red")
@@ -189,7 +189,7 @@ SEIRfitting=function(init_sets_list,
   }
   dev.off()
   
-  png(paste0("../output/par_traj_run_",run_id,".png"), width=1000, height=500)
+  pdf(paste0("../output/par_traj_run_",run_id,".pdf"), width=1000, height=500)
   par(mfrow = c(2, 4))
   for(i in 1:n_pars) {
     plot(1:nrow(mcmc_pars_estimate), mcmc_pars_estimate[, i], ylab = pars_name[i], xlab = "iter", main = "", type = "l")

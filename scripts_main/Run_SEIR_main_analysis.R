@@ -1,15 +1,19 @@
 ## IMPORTANT: Please set code_root variable properly. 
 ## code_root should be set to the directory where the repository README file is located. 
 ## For more information, please read the repository README file
-code_root="~/SAPHIRE/"
+code_root= "/n/holystore01/LABS/xlin/Lab/hzhang/SAPHIRE/"
 
 setwd(paste0(code_root, "scripts_main"))
+#install.packages("BayesianTools")
 library(BayesianTools)
+#install.packages("vioplot")
 library(vioplot)
-library("corrplot")
+#install.packages("corrplot")
+library(corrplot)
+#install.packages("readr")
 library(readr)
+#install.packages("cairoDevice")
 library(cairoDevice)
-
 ##
 source(paste0(code_root, "R/fun_SEIRpred.R"))
 source(paste0(code_root, "R/fun_SEIRsimu.R"))
