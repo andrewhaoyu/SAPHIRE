@@ -189,7 +189,7 @@ SEIRfitting=function(init_sets_list,
   }
   dev.off()
   
-  pdf(paste0("../output/par_traj_run_",run_id,".pdf"), width=1000, height=500)
+  pdf(paste0("../output/par_traj_run_",run_id,".pdf"), width=10, height=10)
   par(mfrow = c(2, 4))
   for(i in 1:n_pars) {
     plot(1:nrow(mcmc_pars_estimate), mcmc_pars_estimate[, i], ylab = pars_name[i], xlab = "iter", main = "", type = "l")

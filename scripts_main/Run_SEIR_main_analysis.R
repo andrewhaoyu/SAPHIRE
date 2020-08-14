@@ -1,7 +1,8 @@
 ## IMPORTANT: Please set code_root variable properly. 
 ## code_root should be set to the directory where the repository README file is located. 
 ## For more information, please read the repository README file
-code_root= "/n/holystore01/LABS/xlin/Lab/hzhang/SAPHIRE/"
+code_root="/data/zhangh24/SAPHIRE/"
+#code_root= "/n/holystore01/LABS/xlin/Lab/hzhang/SAPHIRE/"
 
 setwd(paste0(code_root, "scripts_main"))
 #install.packages("BayesianTools")

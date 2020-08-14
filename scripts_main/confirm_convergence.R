@@ -48,3 +48,4 @@ plot_par_3traj("delta3", expression(delta[3]))
 plot_par_3traj("delta4", expression(delta[4]))
 plot_par_3traj("delta5", expression(delta[5]))
 dev.off()
+
