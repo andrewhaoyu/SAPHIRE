@@ -25,7 +25,7 @@ default_pars_density <- function(pars) {
 }
 
 default_pars_sampler <- function(n = 1) {
-  s_vec <- matrix(NA, n, 8)
+  s_vec <- matrix(NA, n, 9)
   ## b12, b3, b4, b5
   for(i in c(1:4)) {
     s_vec[, i] <- runif(n, 0, 2) 
@@ -62,7 +62,7 @@ SEIRfitting=function(init_sets_list,
                      plot_combined_fig=T,
                      pars_density=default_pars_density,
                      pars_sampler=default_pars_sampler,
-                     pars_name=c("b12", "b3", "b4", "b5", "r12", "delta3", "delta4", "delta5"),
+                     pars_name=c("b12", "b3", "b4", "b5", "r12", "delta3", "delta4", "delta5","phi"),
                      calc_clearance=T,
                      n_burn_in=4000,
                      n_iterations=180000) {
@@ -88,12 +88,11 @@ SEIRfitting=function(init_sets_list,
     ypred <- SEIRpred(pars, init_settings = init_sets_list)
     ypred <- ypred[, "Onset_expect"]
     phi = pars[length(pars)]
-    p = phi/(phi+as.numeric(ypred))
+    #p = phi/(phi+as.numeric(ypred))
     # meant to suppress warnings when ypred is negative
     suppressWarnings(p <- dnbinom(x = as.numeric(onset_obs), 
                                   size = phi,
-                                  prob = p,
-                                  ypred,log=T))
+                                  mu = ypred,log=T))
     
     #if(any(p == 0) || any(is.nan(p))){
     if(any(is.nan(p))){  
@@ -212,7 +211,7 @@ SEIRfitting=function(init_sets_list,
     SEIRplot(pars_estimate = mcmc_pars_estimate, file_name = run_id, init_settings = init_sets_list, panel_B_R_ylim = panel_B_R_ylim)
   }
   
-  par(mfrow = c(1, 1))
+  #par(mfrow = c(1, 1))
   # corrplot(cor(mcmc_pars_estimate))
   # pairs(mcmc_pars_estimate)
   
