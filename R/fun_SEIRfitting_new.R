@@ -1,5 +1,5 @@
 library(cairoDevice)
-
+library(invgamma)
 default_pars_density <- function(pars) {
   d_vec <- rep(NA, 9)
   ##b12, b3, b4, b5
@@ -20,7 +20,9 @@ default_pars_density <- function(pars) {
   d_vec[8] <- dnorm(delta_5, delta_mean, delta_sd, log = T)
   ##
   phi = pars[9]
-  d_vec[9] = dgamma(phi,gamma_shape,gamma_rate,log =T)
+  #d_vec[9] = dgamma(phi,gamma_shape,gamma_rate,log =T)
+  d_vec[9] = dinvgamma(phi,shape = gamma_shape,
+                       rate = gamma_rate,log =T)
   return(sum(d_vec))
 }
 
@@ -39,7 +41,10 @@ default_pars_sampler <- function(n = 1) {
   s_vec[, 7] <- rnorm(n, delta_mean, delta_sd)
   ## r5
   s_vec[, 8] <- rnorm(n, delta_mean, delta_sd)
-  s_vec[,9] <- rgamma(n,gamma_shape,gamma_rate)
+  #s_vec[,9] <- rgamma(n,gamma_shape,gamma_rate)
+  s_vec[,9] <- rinvgamma(n,
+                         shape = gamma_shape,
+                         rate = gamma_rate)
   return(s_vec)
 }
 
@@ -91,7 +96,8 @@ SEIRfitting=function(init_sets_list,
     #p = phi/(phi+as.numeric(ypred))
     # meant to suppress warnings when ypred is negative
     suppressWarnings(p <- dnbinom(x = as.numeric(onset_obs), 
-                                  size = phi,
+                                  #size = phi,
+                                  size = 1/phi,
                                   mu = ypred,log=T))
     
     #if(any(p == 0) || any(is.nan(p))){
