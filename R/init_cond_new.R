@@ -87,5 +87,5 @@ delta_mean <- 0
 delta_sd <- 1
 beta_shape1 <- 7.3
 beta_shape2 <- 24.6
-gamma_shape = 5
+gamma_shape = 1
 gamma_rate = 1
